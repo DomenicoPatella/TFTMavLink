@@ -12,7 +12,10 @@ Display 128x160
   <img src="https://github.com/dpsoftware/TFTMavLink/blob/master/doc/images/IMG_2.jpg" width="320" height="427">
  </td>
  <td>
-  This text is in the table data cell on the right.
+  <img src="https://github.com/dpsoftware/TFTMavLink/blob/master/doc/images/IMG_3.jpg" width="320" height="427">
+ </td>
+ <td>
+  <img src="https://github.com/dpsoftware/TFTMavLink/blob/master/doc/images/IMG_4.jpg" width="320" height="427">
  </td>
 </tr>
 </table>
