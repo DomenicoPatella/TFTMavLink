@@ -17,3 +17,19 @@ Display information with a simplet TFT Display 128x160.
  </td>
 </tr>
 </table>
+
+<table width="500px" height="100%" border="0">
+<tr>
+ <td>
+  <img src="https://github.com/dpsoftware/TFTMavLink/blob/master/doc/images/IMG_5.jpg" width="320" height="427">
+ </td>
+ <td>
+  <img src="https://github.com/dpsoftware/TFTMavLink/blob/master/doc/images/IMG_6.jpg" width="320" height="427">
+ </td>
+
+</tr>
+</table>
+
+<video width="320" height="240" controls>
+    <source src="video.mp4" type="video/mp4">
+</video>
