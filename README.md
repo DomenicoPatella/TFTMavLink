@@ -26,10 +26,10 @@ Display information with a simplet TFT Display 128x160.
  <td>
   <img src="https://github.com/dpsoftware/TFTMavLink/blob/master/doc/images/IMG_6.jpg" width="320" height="427">
  </td>
+ <td>
+ </td>
 
 </tr>
 </table>
 
-<video width="320" height="240" controls>
-    <source src="video.mp4" type="video/mp4">
-</video>
+![Watch the video](https://github.com/dpsoftware/TFTMavLink/blob/master/doc/images/VID_20190109_001611.mp4)
