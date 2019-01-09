@@ -32,4 +32,4 @@ Display information with a simplet TFT Display 128x160.
 </tr>
 </table>
 
-![Watch the video](https://github.com/dpsoftware/TFTMavLink/blob/master/doc/images/VID_20190109_001611.mp4)
+![Watch the video](https://github.com/dpsoftware/TFTMavLink/blob/master/doc/images/VID_20190109_001611.mp4?raw=true)
