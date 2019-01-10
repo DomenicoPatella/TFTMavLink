@@ -32,7 +32,7 @@ void MavlinkProcessor::tryToConnectToAPM() {
 			delay(10);
 
 ```
-Once the connection is established , the processore read the messages and store the informations on the appropriate structure
+Once the connection is established , the processore read the messages and store the informations to the appropriate structure
 
 ```c++
  // MAVLINK_MSG_ID_VFR_HUD
