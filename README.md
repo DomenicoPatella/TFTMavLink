@@ -81,8 +81,14 @@ switch (mav_telemetry.gps_raw.fix_type) {
 
 actualScreen = PSYS;
 ```
-The informations are showed on the page for fuctionality, a pushbutton is used to loop around the page. To improve the perfomance the strings are stored in program space.Every page start a stream rate of messages , it's very important to keep low the cycle time (100-300ms)
+The informations are showed on the page for fuctionality, a pushbutton is used to move around the pages. To improve the perfomance the strings are stored in the program space see [Resource](https://github.com/dpsoftware/TFTMavLink/blob/master/Mylib/Resource.h). 
+it's very important to keep low the cycle time (100-300ms) for this reason every page start or stop  a stream rate of messages. Only the relative message showed to the display is required. 
 
+The class TFT offer the opportuniy to draw an icon 16x16
+
+```c++
+
+```
 
 SYSTEM STATUS | HUD | RC CHANNEL |  ATTITUDE
 ------------ | ------| ----|------|
