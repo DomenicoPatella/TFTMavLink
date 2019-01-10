@@ -7,7 +7,7 @@ Display information with a simplet TFT Display 128x160.
 This display is an extension of the onboard display. It's possibile  to show  more information , and could be useful for a more exausistive pre-arm check.
 
 The components required are :
-* Display TFT 120x160 
+* Display TFT 120x180  (ST7735)
 * Arduino Nano 
 * Optional resistors for analog cell voltage
 
