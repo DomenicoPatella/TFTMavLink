@@ -9,6 +9,7 @@ This display is an extension of the onboard display. It's possibile  to show  mo
 The components required are :
 * Display TFT 120x160 
 * Arduino Nano 
+* Optional resistors for analog cell voltage
 
 # How does it work ?
 The mechanis is simple , a Mavlinkprocessor establish a comunication with a FlightController and require the stream messages.
@@ -83,11 +84,11 @@ The informations are showed on the page for fuctionality.
 SYSTEM STATUS | HUD | RC CHANNEL |  ATTITUDE
 ------------ | ------| ----|------|
 Armed/Disarmed |Heading | CH1....CH8 bargraph |Roll 
-GPS Status (Fix,no Fix ,ec..) |Groundspeed |  RSSI |Pitch
-GPS Sat/HDOP |Alt | |Yaw
-GPS number  |Climb | |Rollspeed
-Message text | Throttle | |Pitchspeed 
-             |          | | Yawspeed
+GPS Status (Fix,no Fix ,ec..) |Groundspeed | RSSI |Pitch
+GPS Sat/HDOP |Alt |... |Yaw
+GPS number  |Climb |... |Rollspeed
+Message text | Throttle |... |Pitchspeed 
+ ...         |...       |... | Yawspeed
 	     
   <img src="https://github.com/dpsoftware/TFTMavLink/blob/master/doc/images/IMG_2.jpg" width="320" height="427">
   <img src="https://github.com/dpsoftware/TFTMavLink/blob/master/doc/images/IMG_3.jpg" width="320" height="427">
