@@ -6,7 +6,7 @@ TFT  onboard display for Arducopter/Pixhawk
 ![diagram](https://github.com/dpsoftware/TFTMavLink/blob/master/doc/images/Diagram.png)
 
 This display is an extension of the [onboard display SSD1306](http://ardupilot.org/copter/docs/common-display-onboard.html)
-It's possibile  to show  more useful information  for a complete pre-arm check.
+the difference is the possibility to show  more useful information for a complete pre-arm check.
 
 The components required are :
 * Display TFT 120x180  (ST7735)
