@@ -4,12 +4,13 @@ Display information with a simplet TFT Display 128x160.
 
 ![diagram](https://github.com/dpsoftware/TFTMavLink/blob/master/doc/images/Diagram.png)
 
-This display is an extension of the onboard display. It's possibile  to show  more information , and could be useful for a more exausistive pre-arm check.
+This display is an extension of the [onboard display SSD1306](http://ardupilot.org/copter/docs/common-display-onboard.html)
+It's possibile  to show  more information useful for a complete pre-arm check
 
 The components required are :
 * Display TFT 120x180  (ST7735)
 * Arduino Nano 
-* Optional resistors for analog cell voltage
+* Optional resistors for analog cell voltage input
 
 # How does it work ?
 The mechanis is simple , a Mavlinkprocessor establish a comunication with a FlightController and require the stream messages.
@@ -98,3 +99,8 @@ Message text | Throttle |... |Pitchspeed
 
 
 ![Watch the video](https://github.com/dpsoftware/TFTMavLink/blob/master/doc/images/VID_20190109_001611.mp4?raw=true)
+
+Inspirated By FrskyTElemetryScript  (MavlinkProcessor.cpp)
+
+
+
