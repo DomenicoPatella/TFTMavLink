@@ -13,13 +13,13 @@ The components required are :
 The mechanis is simple , a Mavlinkprocessor establish a comunication with a FlightController and require the stream messages.
 The informations are show on the page for fuctionality. 
 
-SYSTEM STATUS | Second Header
+SYSTEM STATUS | HUD
 ------------ | -------------
-Armed/Disarmed 
-GPS Status (Fix,no Fix ,ec..)
-GPS Sat/HDOP
-GPS number 
-Message text | 
+Armed/Disarmed |Heading
+GPS Status (Fix,no Fix ,ec..) |Groundspeed
+GPS Sat/HDOP |Alt
+GPS number  |Climb
+Message text | Throttle 
 
  <img src="https://github.com/dpsoftware/TFTMavLink/blob/master/doc/images/IMG_2.jpg" width="320" height="427">
 
