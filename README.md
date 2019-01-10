@@ -1,6 +1,6 @@
 # TFTMavLink
 TFT  onboard display for Arducopter/Pixhawk 
-Display information with a simplet TFT Display 128x160.  
+Show informations with a simplet TFT Display 128x160.  
 
 ![diagram](https://github.com/dpsoftware/TFTMavLink/blob/master/doc/images/Diagram.png)
 
@@ -80,7 +80,7 @@ switch (mav_telemetry.gps_raw.fix_type) {
 
 actualScreen = PSYS;
 ```
-The informations are showed on the page for fuctionality. 
+The informations are showed on the page for fuctionality, a pushbutton is used to loop around the page. To improve the perfomance the strings are stored in program space. 
 
 SYSTEM STATUS | HUD | RC CHANNEL |  ATTITUDE
 ------------ | ------| ----|------|
@@ -99,6 +99,9 @@ Message text | Throttle |... |Pitchspeed
 
 
 ![Watch the video](https://github.com/dpsoftware/TFTMavLink/blob/master/doc/images/VID_20190109_001611.mp4?raw=true)
+
+# The enviroment used to build the project 
+Eclipse Cpp 2018-09 with extension for Arduino program
 
 Inspirated By [MavlinkSmartPort](https://github.com/dpsoftware/MAVLinkSmartPort) 
 
