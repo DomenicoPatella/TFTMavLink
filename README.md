@@ -1,11 +1,12 @@
 # TFTMavLink
-TFT  onboard display for Arducopter/Pixhawk 
-Show informations with a simplet TFT Display 128x160.  
+TFT  onboard display for Arducopter/Pixhawk
+
+>Show informations with a cheap TFT Display 128x160 and arduino nano  
 
 ![diagram](https://github.com/dpsoftware/TFTMavLink/blob/master/doc/images/Diagram.png)
 
 This display is an extension of the [onboard display SSD1306](http://ardupilot.org/copter/docs/common-display-onboard.html)
-It's possibile  to show  more information useful for a complete pre-arm check
+It's possibile  to show  more useful information  for a complete pre-arm check.
 
 The components required are :
 * Display TFT 120x180  (ST7735)
@@ -80,7 +81,8 @@ switch (mav_telemetry.gps_raw.fix_type) {
 
 actualScreen = PSYS;
 ```
-The informations are showed on the page for fuctionality, a pushbutton is used to loop around the page. To improve the perfomance the strings are stored in program space. 
+The informations are showed on the page for fuctionality, a pushbutton is used to loop around the page. To improve the perfomance the strings are stored in program space.Every page start a stream rate of messages , it's very important to keep low the cycle time (100-300ms)
+
 
 SYSTEM STATUS | HUD | RC CHANNEL |  ATTITUDE
 ------------ | ------| ----|------|
