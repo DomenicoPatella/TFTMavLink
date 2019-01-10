@@ -80,18 +80,16 @@ actualScreen = PSYS;
 ```
 The informations are showed on the page for fuctionality. 
 
-SYSTEM STATUS | HUD
------------- | -------------
-Armed/Disarmed |Heading
-GPS Status (Fix,no Fix ,ec..) |Groundspeed
-GPS Sat/HDOP |Alt
-GPS number  |Climb
-Message text | Throttle 
-
- <img src="https://github.com/dpsoftware/TFTMavLink/blob/master/doc/images/IMG_2.jpg" width="320" height="427">
-
-
-
+SYSTEM STATUS | HUD | RC CHANNEL |  ATTITUDE
+------------ | ------| ----|
+Armed/Disarmed |Heading | CH1....CH8 bargraph |Roll 
+GPS Status (Fix,no Fix ,ec..) |Groundspeed |  RSSI |Pitch
+GPS Sat/HDOP |Alt |Yaw
+GPS number  |Climb |Rollspeed
+Message text | Throttle |Pitchspeed 
+             |          | Yawspeed
+	     
+  <img src="https://github.com/dpsoftware/TFTMavLink/blob/master/doc/images/IMG_2.jpg" width="320" height="427">
   <img src="https://github.com/dpsoftware/TFTMavLink/blob/master/doc/images/IMG_3.jpg" width="320" height="427">
   <img src="https://github.com/dpsoftware/TFTMavLink/blob/master/doc/images/IMG_4.jpg" width="320" height="427">
   <img src="https://github.com/dpsoftware/TFTMavLink/blob/master/doc/images/IMG_5.jpg" width="320" height="427">
