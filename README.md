@@ -100,7 +100,6 @@ Message text | Throttle |... |Pitchspeed
 
 ![Watch the video](https://github.com/dpsoftware/TFTMavLink/blob/master/doc/images/VID_20190109_001611.mp4?raw=true)
 
-Inspirated By FrskyTElemetryScript  (MavlinkProcessor.cpp)
-
+Inspirated By [MavlinkSmartPort](https://github.com/dpsoftware/MAVLinkSmartPort) 
 
 
