@@ -15,12 +15,13 @@ The informations are show on the page for fuctionality.
 
 SYSTEM STATUS | Second Header
 ------------ | -------------
-Armed/Disarmed | <img src="https://github.com/dpsoftware/TFTMavLink/blob/master/doc/images/IMG_2.jpg" width="320" height="427">
+Armed/Disarmed 
 GPS Status (Fix,no Fix ,ec..)
 GPS Sat/HDOP
 GPS number 
-Message text 
-  
+Message text | 
+
+ <img src="https://github.com/dpsoftware/TFTMavLink/blob/master/doc/images/IMG_2.jpg" width="320" height="427">
 
 
 
