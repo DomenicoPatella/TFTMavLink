@@ -83,7 +83,12 @@ void setup() {
 	bool connected;
 
 	MavlinkProcessor mavlink_processor;
-	Battery lipo(A0);
+	// A0  1 Cell 3.7V
+	// A1  2 Cell 7,4V
+	// A2  3 Cell 11,1V
+	// A3  3 Cell 14,8V
+
+	Battery lipo;
 
 
 	tft.changeScreen = tft.PSYS;

@@ -7,13 +7,16 @@
 
 #include "Battery.h"
 
-Battery::Battery(uint8_t analogpin) {
+Battery::Battery() {
 	// TODO Auto-generated constructor stub
 
-	_pin = analogpin;
+	_pin[0] = A0;
+	_pin[1] = A1;
+	_pin[2] = A2;
+	_pin[3] = A3;
+
 	Kerr = 0.024017;
 	Kcell = 0.203337;
-
 
 }
 
@@ -23,20 +26,23 @@ Battery::Battery(uint8_t analogpin) {
  * A1 Cell 2
  * A2 Cell 3
  * A3 Cell 4
- * A4 Cell 5
- * A5 Cell 6
  */
 void Battery::getVoltage() {
 
+	float raw[4];
 
-	float raw = analogRead(_pin);
-	float x=raw/1023;
-	float calc = (x * 1.1) - 0.024017;
-	DAC[0] = calc; // mV from DAC
-	voltage[0] = calc / 0.203337;  //1Cell voltage
-	voltage[1] = (calc / 0.203337) +0.1;  //2Cell voltage
-	voltage[2] = (calc / 0.203337) -0.1;  //3Cell voltage
+	for (int var = 0; var < 4; var++) {
+		raw[var] = analogRead(_pin[var]);
+		float x = raw[var] / 1023;
+		float calc = (x * 1.1) - 0.024017;
+		DAC[var] = calc; // mV from DAC
+		voltage[var] = calc / 0.203337;  //  Cell voltage
+		if (voltage[var] < 0.0)
+				voltage[var] = 0.0;
 
-	if(voltage[0]<0.0) voltage[0]=0.0;
+	}
+
+
+
 }
 

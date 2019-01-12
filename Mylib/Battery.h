@@ -12,13 +12,13 @@
 class Battery {
 public:
 
-	Battery(uint8_t  analogpin);
+	Battery();
     void getVoltage();
-    float voltage[4];
-    float DAC[4];
+    float voltage[3];
+    float DAC[3];
 
 private:
-    uint8_t _pin;
+    uint8_t _pin[3];
 	float Kcell,Kerr;
 
 
