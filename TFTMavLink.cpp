@@ -1,4 +1,4 @@
-#include "SoftwareSerial/SoftwareSerial.h"
+//#include "SoftwareSerial/SoftwareSerial.h"
 #include <GCS_MAVLink.h>
 #include "Arduino.h"
 #include "MavlinkProcessor.h"
@@ -10,9 +10,10 @@
 #define TFT_RST        9 // Or set to -1 and connect to Arduino RESET pin
 #define TFT_DC         8
 
+//#define DEBUG
+
 // For 1.44" and 1.8" TFT with ST7735 (including HalloWing) use:
 //Adafruit_ST7735 tft = Adafruit_ST7735(TFT_CS, TFT_DC, TFT_RST);
-
 TFT tft = TFT(TFT_CS, TFT_DC, TFT_RST);
 
 int buttonState = LOW;           // the current reading from the input pin
@@ -23,7 +24,11 @@ int lastButtonState = -1;   // the previous reading from the input pin
 unsigned long lastDebounceTime = 0;  // the last time the output pin was toggled
 unsigned long debounceDelay = 100; // the debounce time; increase if the output flickers
 
-
+/**
+ * @brief Evalute state pushbutton
+ * @param reading
+ * @return
+ */
 int button(int reading) {
 
 	//sample the state of the button - is it pressed or not?
@@ -32,7 +37,7 @@ int button(int reading) {
 	//filter out any noise by setting a time buffer
 	if ((millis() - lastDebounceTime) > debounceDelay) {
 
-		//
+
 		if ((buttonState == HIGH) && (lastButtonState < 0)) {
 			lastButtonState = -lastButtonState;
 			lastDebounceTime = millis(); //set the current time
@@ -43,6 +48,7 @@ int button(int reading) {
 
 			lastButtonState = -lastButtonState;
 			lastDebounceTime = millis(); //set the current time
+			//Change screen page when button is pressed
 			if (tft.actualScreen < tft.PATT) {
 				tft.changeScreen = tft.changeScreen + 1;
 
@@ -58,6 +64,7 @@ int button(int reading) {
 	}
 
 }
+
 
 
 
@@ -79,9 +86,9 @@ void setup() {
 	Battery lipo(A0);
 
 
-	tft.changeScreen = tft.PATT;
+	tft.changeScreen = tft.PSYS;
 	tft.initR(INITR_BLACKTAB);		// Init ST7735S chip, black tab
-	tft.fillScreen(ST77XX_BLACK);
+	tft.fillScreen(ST7735_BLACK);
 	tft.setRotation(1);
 	tft.setTextWrap(true);
 	tft.pageLogo();
@@ -92,6 +99,7 @@ void setup() {
 		uint32_t start = micros() / 1000;;
 		unsigned long last;
 
+
 		int btn = button(digitalRead(3));
 
 		mavlink_processor.receiveTelemetry();
@@ -101,21 +109,21 @@ void setup() {
 
 		case tft.PSYS:
 			if (tft.actualScreen != tft.PSYS) {
-				tft.fillScreen(ST77XX_BLACK);
+				tft.fillScreen(ST7735_BLACK);
 				tft.actualScreen = tft.PSYS;
 			}
 			break;
 
 		case tft.PHUD:
 			if (tft.actualScreen != tft.PHUD) {
-				tft.fillScreen(ST77XX_BLACK);
+				tft.fillScreen(ST7735_BLACK);
 				tft.actualScreen = tft.PHUD;
 			}
 			break;
 
 		case tft.PRC:
 			if (tft.actualScreen != tft.PRC) {
-				tft.fillScreen(ST77XX_BLACK);
+				tft.fillScreen(ST7735_BLACK);
 				tft.actualScreen = tft.PRC;
 				for (int var = 0; var < 8; var++) {
 					tft.lastRawRc[var]=0;
@@ -125,13 +133,13 @@ void setup() {
 
 		case tft.PBATT:
 			if (tft.actualScreen != tft.PBATT) {
-				tft.fillScreen(ST77XX_BLACK);
+				tft.fillScreen(ST7735_BLACK);
 				tft.actualScreen = tft.PBATT;
 			}
 			break;
 		case tft.PATT:
 			if (tft.actualScreen != tft.PATT) {
-				tft.fillScreen(ST77XX_BLACK);
+				tft.fillScreen(ST7735_BLACK);
 				tft.actualScreen = tft.PATT;
 			}
 			break;
@@ -139,7 +147,7 @@ void setup() {
 
 		default:
 			if (tft.actualScreen != tft.PLOGO) {
-				tft.fillScreen(ST77XX_BLACK);
+				tft.fillScreen(ST7735_BLACK);
 				tft.actualScreen = tft.PLOGO;
 			}
 		}
@@ -156,7 +164,6 @@ void setup() {
 					lipo.voltage);
 		}
 		if (tft.actualScreen == tft.PATT){
-
 			tft.pageAttitue(mavlink_processor.getGatheredTelemetry(), connected,mavlink_processor.stream_flag);
 		}
 
@@ -166,16 +173,16 @@ void setup() {
 		if (serialEventRun)
 			serialEventRun();
 
+#ifdef DEBUG
 		int y =112;
 		char text[10];
-
 		tft.setCursor(0, y );
 		uint32_t end = micros() / 1000 - start;
-		//tft.drawtext("Loop [ms]:", ST7735_CYAN,ST7735_BLACK ,0, y);
-		//tft.drawtext(end, ST7735_GREEN,ST7735_BLACK ,tft.getCursorX(), tft.getCursorY());
-		//tft.drawtext("MavlinkTime [s] :", ST7735_CYAN,ST7735_BLACK ,0, tft.getCursorY()+8);
-		//tft.drawtext((float)mavlink_processor.getLastComTime()/1000.0, ST7735_GREEN,ST7735_BLACK ,1,1,tft.getCursorX(), tft.getCursorY());
-
+		tft.drawtext("Loop [ms]:", ST7735_CYAN,ST7735_BLACK ,0, y);
+		tft.drawtext(end, ST7735_GREEN,ST7735_BLACK ,tft.getCursorX(), tft.getCursorY());
+		tft.drawtext("MavlinkTime [s] :", ST7735_CYAN,ST7735_BLACK ,0, tft.getCursorY()+8);
+		tft.drawtext((float)mavlink_processor.getLastComTime()/1000.0, ST7735_GREEN,ST7735_BLACK ,1,1,tft.getCursorX(), tft.getCursorY());
+#endif
 
 	}
 

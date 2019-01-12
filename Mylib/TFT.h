@@ -44,7 +44,6 @@ public:
 	void drawtext(uint8_t text, uint16_t forgcolor ,uint16_t backgcolor ,int x ,int y);
 	void drawtext(uint32_t text, uint16_t forgcolor ,uint16_t backgcolor ,int x ,int y);
 	void drawtext(int32_t text, uint16_t forgcolor ,uint16_t backgcolor ,int x ,int y);
-
 	void drawtext(float text, uint16_t forgcolor ,uint16_t backgcolor ,signed char w, unsigned char p,int x ,int y);
 
 
@@ -56,14 +55,11 @@ public:
 	void pageAttitue(const MavlinkProcessor::MavlinkTelemetry& mav_telemetry, bool connected,MavlinkProcessor::stream &stream);
 
 	bool drawIcon(int x,int y,const int icon[][16],uint16_t fgcolor,uint16_t bgcolor=ST7735_BLACK);
-
-
 	void console(const char* text);
 private:
     char buffer[20];
-
-
 	void RawBar(uint16_t channel,int x , int y,int &temp);
+	void checkVoltageMinMax(float _voltage, uint16_t& color);
 };
 
 #endif /* MYLIB_TFT_H_ */

@@ -5,8 +5,8 @@
  *      Author: dpatella
  */
 
-#ifndef FRSKYTELEMETRYMAVLINK_MYLIB_BATTERY_H_
-#define FRSKYTELEMETRYMAVLINK_MYLIB_BATTERY_H_
+#ifndef MYLIB_BATTERY_H_
+#define MYLIB_BATTERY_H_
 #include "Arduino.h"
 
 class Battery {
@@ -24,4 +24,4 @@ private:
 
 };
 
-#endif /* FRSKYTELEMETRYMAVLINK_MYLIB_BATTERY_H_ */
+#endif /* MYLIB_BATTERY_H_ */

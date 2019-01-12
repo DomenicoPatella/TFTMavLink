@@ -181,13 +181,14 @@ void TFT::drawtext(float text, uint16_t forgcolor = ST7735_WHITE,
 void TFT::pageLogo() {
 
 	setTextSize(1);
+	int offsY = 10;
 	drawtext(OSD_LOGO(0), ST7735_WHITE, ST7735_BLACK, 30, 0);
 	drawtext(OSD_LOGO(1), ST7735_WHITE, ST7735_BLACK, 0, 16);
-	drawtext(OSD_LOGO(2), ST7735_GREEN, ST7735_BLACK, 0, 24);
-	drawtext(OSD_LOGO(3), ST7735_GREEN, ST7735_BLACK, 0, 32);
-	drawtext(OSD_LOGO(4), ST7735_WHITE, ST7735_BLACK, 0, 40);
-	drawtext(OSD_LOGO(5), ST7735_GREEN, ST7735_BLACK, 0, 48);
-	drawtext(OSD_LOGO(6), ST7735_GREEN, ST7735_BLACK, 0, 56);
+	drawtext(OSD_LOGO(2), ST7735_GREEN, ST7735_BLACK, 0, getCursorY() + offsY);
+	drawtext(OSD_LOGO(3), ST7735_GREEN, ST7735_BLACK, 0, getCursorY() + offsY);
+	drawtext(OSD_LOGO(4), ST7735_WHITE, ST7735_BLACK, 0, getCursorY() + offsY);
+	drawtext(OSD_LOGO(5), ST7735_GREEN, ST7735_BLACK, 0, getCursorY() + offsY);
+	drawtext(OSD_LOGO(6), ST7735_GREEN, ST7735_BLACK, 0, getCursorY() + offsY);
 	setTextSize(0);
 	actualScreen = PLOGO;
 
@@ -203,7 +204,7 @@ void TFT::pageSys(const MavlinkProcessor::MavlinkTelemetry& mav_telemetry,
 		bool connected, MavlinkProcessor::stream &stream) {
 
 	char text[8];
-	int offsY = 8;
+	int offsY = 12;
 	stream.START_SYS_STATUS = 1;
 	stream.START_ATTITUDE = 0;
 	stream.START_VFR = 0;
@@ -227,7 +228,7 @@ void TFT::pageSys(const MavlinkProcessor::MavlinkTelemetry& mav_telemetry,
 		drawtext(OSD_SYS(5), ST7735_RED, ST7735_BLACK, 36, 16);
 	}
 
-	drawtext(OSD_SYS(6), ST7735_BLUE, ST7735_BLACK, 0, 24);
+	drawtext(OSD_SYS(6), ST7735_BLUE, ST7735_BLACK, 0, getCursorY() + offsY);
 	drawtext(OSD_SYS(7), ST7735_BLUE, ST7735_BLACK, 0, getCursorY() + offsY);
 	drawtext(OSD_SYS(8), ST7735_BLUE, ST7735_BLACK, 0, getCursorY() + offsY);
 	drawtext(OSD_SYS(10), ST7735_BLUE, ST7735_BLACK, 0, getCursorY() + offsY);
@@ -246,7 +247,7 @@ void TFT::pageSys(const MavlinkProcessor::MavlinkTelemetry& mav_telemetry,
 		strcpy(text, "3D Fix");
 		break;
 	}
-	drawtext(text, ST7735_WHITE, ST7735_BLACK, 72, 24);
+	drawtext(text, ST7735_WHITE, ST7735_BLACK, 72, 16+offsY);
 	drawtext(mav_telemetry.gps_raw.satellites_visible, ST7735_WHITE,
 			ST7735_BLACK, 84, getCursorY() + offsY);
 	drawtext(mav_telemetry.gps_raw.eph, ST7735_WHITE, ST7735_BLACK, 84,
@@ -261,7 +262,7 @@ void TFT::pageSys(const MavlinkProcessor::MavlinkTelemetry& mav_telemetry,
 }
 
 /**
- *
+ * @brief Show page telemetry HUD
  * @param mav_telemetry
  * @param connected
  * @param stream
@@ -269,7 +270,7 @@ void TFT::pageSys(const MavlinkProcessor::MavlinkTelemetry& mav_telemetry,
 void TFT::pageHud(const MavlinkProcessor::MavlinkTelemetry& mav_telemetry,
 		bool connected, MavlinkProcessor::stream &stream) {
 
-	int offsY = 10;
+	int offsY = 12;
 
 	stream.START_SYS_STATUS = 0;
 	stream.START_ATTITUDE = 0;
@@ -322,7 +323,7 @@ void TFT::RawBar(uint16_t channel, int x, int y, int &temp) {
 }
 
 /**
- *
+ * @brief Show page RC Channels
  * @param mav_telemetry
  * @param connected
  */
@@ -374,8 +375,17 @@ void TFT::pageRC(const MavlinkProcessor::MavlinkTelemetry& mav_telemetry,
 
 }
 
+void TFT::checkVoltageMinMax(float _voltage, uint16_t& color) {
+	if (_voltage < 3.5 || _voltage > 4.2) {
+		color = ST7735_RED;
+	} else {
+		color = ST7735_YELLOW;
+	}
+
+}
+
 /**
- *
+ * @brief Show page battery cell/voltage
  * @param mav_telemetry
  * @param connected
  */
@@ -388,7 +398,7 @@ void TFT::pageBatt(const MavlinkProcessor::MavlinkTelemetry& mav_telemetry,
 	stream.START_BATT = 1;
 	stream.START_RC = 0;
 
-	int offsY = 10;
+	int offsY = 12;
 	//Title;
 	drawtext(OSD_BATT(0), ST7735_WHITE, ST7735_BLACK, 0, 0);
 	if (connected) {
@@ -406,13 +416,21 @@ void TFT::pageBatt(const MavlinkProcessor::MavlinkTelemetry& mav_telemetry,
 
 	float tot = _voltage[0] + _voltage[1] + _voltage[2] + _voltage[3];
 	drawtext(tot, ST7735_GREEN, ST7735_BLACK, 5, 2, 72, 16);
-	drawtext(_voltage[0], ST7735_YELLOW, ST7735_BLACK, 1, 3, 72,
+	uint16_t color;
+
+	checkVoltageMinMax(_voltage[0], color);
+	drawtext(_voltage[0], color, ST7735_BLACK, 1, 3, 72,
 			getCursorY() + offsY);
-	drawtext(_voltage[1], ST7735_YELLOW, ST7735_BLACK, 1, 3, 72,
+	checkVoltageMinMax(_voltage[1], color);
+	drawtext(_voltage[1], color, ST7735_BLACK, 1, 3, 72,
 			getCursorY() + offsY);
-	drawtext(_voltage[2], ST7735_YELLOW, ST7735_BLACK, 1, 3, 72,
+
+	checkVoltageMinMax(_voltage[2], color);
+	drawtext(_voltage[2], color, ST7735_BLACK, 1, 3, 72,
 			getCursorY() + offsY);
-	drawtext(_voltage[3], ST7735_YELLOW, ST7735_BLACK, 1, 3, 72,
+
+	checkVoltageMinMax(_voltage[3], color);
+	drawtext(_voltage[3], color, ST7735_BLACK, 1, 3, 72,
 			getCursorY() + offsY);
 
 	actualScreen = PBATT;
@@ -428,7 +446,7 @@ void TFT::pageAttitue(const MavlinkProcessor::MavlinkTelemetry& mav_telemetry,
 	stream.START_BATT = 0;
 	stream.START_RC = 0;
 
-	int offsY = 10;
+	int offsY = 12;
 	//Title;
 	drawtext(OSD_ATT(0), ST7735_WHITE, ST7735_BLACK, 0, 0);
 	if (connected) {

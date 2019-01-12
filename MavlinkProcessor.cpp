@@ -21,22 +21,16 @@ MavlinkProcessor::MavlinkProcessor() :
 
 }
 
+
+
 /**
- * @brief
- * @return gathered_telemetry
+ *
+ * @return
  */
 const MavlinkProcessor::MavlinkTelemetry& MavlinkProcessor::getGatheredTelemetry() const {
 	return gathered_telemetry;
 }
 
-/**
- * @brief
- * @return heartbeat_timer
- */
-const unsigned long& MavlinkProcessor::getLastHeartbeat() const {
-
-	return last_connection;
-}
 
 /**
  * @brief
@@ -62,26 +56,24 @@ void MavlinkProcessor::receiveTelemetry() {
 			switch (msg.msgid) {
 
 			case MAVLINK_MSG_ID_HEARTBEAT:  // 0
+				is_connected = true;
+				connection_timer = millis();
+
 				gathered_telemetry.base_mode =
 						mavlink_msg_heartbeat_get_base_mode(&msg);
 				gathered_telemetry.custom_mode =
 						mavlink_msg_heartbeat_get_custom_mode(&msg);
-				connection_timer = millis();
 				break;
+
 			case MAVLINK_MSG_ID_SYS_STATUS:   //
 				is_connected = true;
 				connection_timer = millis();
 
-				gathered_telemetry.battery_voltage =
-						mavlink_msg_sys_status_get_voltage_battery(&msg) / 10; //
-				gathered_telemetry.battery_current =
-						mavlink_msg_sys_status_get_current_battery(&msg) / 10; //
-				gathered_telemetry.battery_remaining =
-						mavlink_msg_sys_status_get_battery_remaining(&msg);
 				mavlink_msg_sys_status_decode(&msg,
 						&gathered_telemetry.sys_status);
 
 				break;
+
 			case MAVLINK_MSG_ID_GPS_RAW_INT:   // 24
 				is_connected = true;
 				connection_timer = millis();
@@ -96,11 +88,13 @@ void MavlinkProcessor::receiveTelemetry() {
 					gathered_telemetry.gps_raw.vel = 0L;
 				}
 				break;
+
 			case MAVLINK_MSG_ID_VFR_HUD:   //  74
 				is_connected = true;
 				connection_timer = millis();
 				mavlink_msg_vfr_hud_decode(&msg, &gathered_telemetry.hud_raw);
 				break;
+
 			case MAVLINK_MSG_ID_ATTITUDE:
 				is_connected = true;
 				connection_timer = millis();
@@ -113,13 +107,20 @@ void MavlinkProcessor::receiveTelemetry() {
 				mavlink_msg_statustext_decode(&msg,
 						&gathered_telemetry.status_text);
 				break;
+
 			case MAVLINK_MSG_ID_RC_CHANNELS_RAW:
 				is_connected = true;
-
 				connection_timer = millis();
 				mavlink_msg_rc_channels_raw_decode(&msg,
 						&gathered_telemetry.rc_raw);
 				break;
+			case MAVLINK_MSG_ID_HWSTATUS:
+				is_connected = true;
+				connection_timer = millis();
+				mavlink_msg_hwstatus_decode(&msg, &gathered_telemetry.hw_status);
+				break;
+
+
 			default:
 				break;
 			}
@@ -128,14 +129,13 @@ void MavlinkProcessor::receiveTelemetry() {
 }
 
 /**
- *
+ *@brief Send stream rates messages
  */
 void MavlinkProcessor::tryToConnectToAPM() {
 	uint16_t len = 0;
-	last_connection = (millis() - heartbeat_timer);
 	if (millis() - heartbeat_timer > 1500UL) {
 		heartbeat_timer = millis();
-		if (true) {    // Start requesting data streams from MavLink
+		if (true) {    // Start requesting data streams every heartbeat_timer
 			digitalWrite(alive_led_pin, HIGH);
 			//SYS STATUS -GPS
 			mavlink_msg_request_data_stream_pack(0xFF, 0xBE, &msg, 1, 1,
@@ -175,6 +175,7 @@ void MavlinkProcessor::tryToConnectToAPM() {
 		}
 	}
 
+	//Check time out comunication
 	if ((millis() - connection_timer) > 5000UL) {
 		is_connected = false;
 		msg_count = 0;
@@ -183,8 +184,8 @@ void MavlinkProcessor::tryToConnectToAPM() {
 }
 
 /**
- *
- * @return
+ * @brief  Get status connection with Flight Controller
+ * @return True if connected
  */
 bool MavlinkProcessor::isConnected() {
 	return is_connected;
@@ -196,7 +197,6 @@ void MavlinkProcessor::simula() {
 	 gathered_telemetry.hud_raw.heading = rand() / 100;
 	 gathered_telemetry.hud_raw.groundspeed = rand() * 0.01;
 	 gathered_telemetry.hud_raw.groundspeed = 123.01231243;
-
 	 gathered_telemetry.hud_raw.throttle = rand();
 	 gathered_telemetry.hud_raw.alt = rand() * 0.01;
 	 gathered_telemetry.hud_raw.climb = rand() * 0.01;

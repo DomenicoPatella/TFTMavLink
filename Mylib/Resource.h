@@ -5,8 +5,8 @@
  *      Author: dpatella
  */
 
-#ifndef FRSKYTELEMETRYMAVLINK_MYLIB_RESOURCE_H_
-#define FRSKYTELEMETRYMAVLINK_MYLIB_RESOURCE_H_
+#ifndef MYLIB_RESOURCE_H_
+#define MYLIB_RESOURCE_H_
 
 #include <avr/pgmspace.h>
 
@@ -15,7 +15,7 @@
 
 //////////////////////////////////////////////////////////
 //  String tables LOGO Page
-const char string_logo0[] PROGMEM = "OSD TFT V2.1";
+const char string_logo0[] PROGMEM = "OSD TFT V2.2";
 const char string_logo1[] PROGMEM = "Inspirated by:";
 const char string_logo2[] PROGMEM = "FrSkyTelemtry";
 const char string_logo3[] PROGMEM = "Mavlink";
