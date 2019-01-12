@@ -44,7 +44,7 @@ unsigned long& MavlinkProcessor::getLastComTime() {
 }
 
 /**
- *
+ *@brief Decode Mavlink messagges
  */
 void MavlinkProcessor::receiveTelemetry() {
 
