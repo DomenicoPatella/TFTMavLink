@@ -91,8 +91,10 @@ The page Battery show up 4 cell voltage. A votage divided ratio is necessary to 
 
 ![PCB Design](https://github.com/dpsoftware/TFTMavLink/blob/master/doc/images/Nano%20TFT_v41_etch_copper_bottom.svg)
 ![PCB Design](https://github.com/dpsoftware/TFTMavLink/blob/master/doc/images/Nano%20TFT_v41_etch_copper_top.svg)
-Shape W=60mm H=50mm
+
 ![PCB Design](https://github.com/dpsoftware/TFTMavLink/blob/master/doc/images/Nano%20TFT_v41_pcb.png)
+Shape W=60mm H=50mm
+
 
 ```c++
 
