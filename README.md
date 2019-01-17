@@ -87,7 +87,7 @@ it's very important to keep low the cycle time (100-300ms) for this reason every
 The page Battery show up 4 cell voltage. A votage divided ratio is necessary to reference the voltage to 1.1V (internal reference Atmega328)
 
 ![Electrical drwaing](https://github.com/dpsoftware/TFTMavLink/blob/master/doc/images/Nano TFT_v4_schem.png)
-![PCB Design] (https://github.com/dpsoftware/TFTMavLink/blob/master/doc/images/Nano TFT_v4_pcb.png)
+![PCB Design](https://github.com/dpsoftware/TFTMavLink/blob/master/doc/images/Nano TFT_v4_pcb.png)
 
 
 
